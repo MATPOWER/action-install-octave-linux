@@ -1,0 +1,45 @@
+name: CI
+
+# controls when action will run
+on:
+  # triggers workflow on push events
+  push:
+  # allows workflow to be triggered manually from Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-latest]
+        ipopt: [false, true]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install Octave
+      if: matrix.ipopt == false
+      uses: ./.
+
+    - name: Install Octave (with IPOPT libs)
+      if: matrix.ipopt == true
+      uses: ./.
+      with:
+        ipopt-libs: true
+
+    - name: Octave ${{ env.OCTAVE_VER }} Installed
+      run: $ML_CMD ver
+
+    - name: IPOPT libs not installed
+      if: matrix.ipopt == false
+      run: |
+        [ ! -f /usr/lib/libipopt.a ] || exit 17
+
+    - name: IPOPT libs installed
+      if: matrix.ipopt == true
+      run: |
+        find /usr/lib -name '*ipopt*' -print
+        [ -f /usr/lib/libipopt.a ] || exit 2
