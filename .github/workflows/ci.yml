@@ -30,7 +30,7 @@ jobs:
       with:
         ipopt-libs: true
 
-    - name: Octave ${{ env.OCTAVE_VER }} Installed
+    - name: Octave ${{ env.ML_VER }} Installed
       run: $ML_CMD ver
 
     - name: IPOPT libs not installed
