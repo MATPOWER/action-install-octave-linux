@@ -18,6 +18,10 @@ variables.
 - `ipopt-libs` - (default `false`) set to `true` to include installation
   of IPOPT libraries
 
+### Outputs
+
+None.
+
 ### Example Usage
 ```
     steps:
