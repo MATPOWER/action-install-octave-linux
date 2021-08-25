@@ -19,8 +19,6 @@ runs:
       run: |
         sudo apt-get install -y -qq liboctave-dev octave
         ${{ inputs.ipopt-libs }} && sudo apt-get install -y -qq coinor-libipopt-dev 
-        echo "IS_MATLAB=0" >> $GITHUB_ENV
-        echo "IS_OCTAVE=1" >> $GITHUB_ENV
         echo "ML_NAME=Octave" >> $GITHUB_ENV
         echo "ML_CMD=octave-cli --no-gui --eval" >> $GITHUB_ENV
         echo "ML_PATHVAR=OCTAVE_PATH" >> $GITHUB_ENV

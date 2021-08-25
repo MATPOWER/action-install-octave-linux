@@ -6,8 +6,6 @@ Install Octave (Linux)
 Installs [GNU Octave][1] on Linux runners and sets the following environment
 variables.
 - `OCTAVE_VER` set to the version of [Octave][1] installed
-- `IS_MATLAB` set to 0
-- `IS_OCTAVE` set to 1
 - `ML_NAME` set to `Octave`
 - `ML_VER` set to same as `OCTAVE_VER`
 - `ML_CMD` set to `octave-cli --no-gui --eval`
