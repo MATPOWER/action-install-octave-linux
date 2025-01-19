@@ -17,7 +17,7 @@ runs:
 
     - name: Install GNU Octave
       run: |
-        sudo apt-get install -y -qq liboctave-dev octave
+        sudo apt-get install -y -qq octave-dev octave
         ${{ inputs.ipopt-libs }} && sudo apt-get install -y -qq coinor-libipopt-dev 
         echo "ML_NAME=Octave" >> $GITHUB_ENV
         echo "ML_CMD=octave-cli --no-gui --eval" >> $GITHUB_ENV
