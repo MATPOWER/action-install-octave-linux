@@ -15,9 +15,19 @@ runs:
       run: sudo apt-get update -qq
       shell: bash
 
+    - name: Get OS version
+      run: |
+        OS_VER=$(grep ^VERSION_ID /etc/os-release | cut -d'=' -f2 | tr -d '"')
+        echo "OS_VER=${OS_VER}" >> $GITHUB_ENV
+      shell: bash
+
     - name: Install GNU Octave
       run: |
-        sudo apt-get install -y -qq octave-dev octave
+        if [ "$OS_VER" = "20.04" ]; then
+          sudo apt-get install -y -qq liboctave-dev octave
+        else
+          sudo apt-get install -y -qq octave-dev octave
+        fi
         ${{ inputs.ipopt-libs }} && sudo apt-get install -y -qq coinor-libipopt-dev 
         echo "ML_NAME=Octave" >> $GITHUB_ENV
         echo "ML_CMD=octave-cli --no-gui --eval" >> $GITHUB_ENV
